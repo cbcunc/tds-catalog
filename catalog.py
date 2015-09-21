@@ -66,7 +66,7 @@ with open("SSV-Ncml.txt", "w") as save:
 print ncml_urls
 
 
-# In[54]:
+# In[56]:
 
 interesting_attributes = ["cdm_data_type",
                           "conventions",
@@ -84,28 +84,33 @@ interesting_attributes = ["cdm_data_type",
                           "title", ]
 ncml_mappings = []
 for ncml_url in ncml_urls:
-    ncml_attributes = {"location": ncml_url}
-    for attribute in interesting_attributes:
-        ncml_attributes[attribute] = None
+    ncml_mapping = {"location": ncml_url}
+    for interesting_attribute in interesting_attributes:
+        ncml_mapping[interesting_attribute] = None
     ncml = requests.get(ncml_url)
     if ncml.ok and ncml.content:
         parser = et.HTMLParser(recover=True)
         tree = et.parse(StringIO(ncml.content), parser)
         root = tree.getroot()
         netcdf = root.find(".//netcdf[@location]")
-        attributes = netcdf.findall("attribute[@name]")
-        for attribute in attributes:
-            name = attribute.attrib["name"].lower()
+        netcdf_attributes = netcdf.findall("attribute[@name]")
+        for netcdf_attribute in netcdf_attributes:
+            name = netcdf_attribute.attrib["name"].lower()
             if name in interesting_attributes:
-                value = attribute.attrib.get("value")
+                value = netcdf_attribute.attrib.get("value")
                 if value:
-                    ncml_attributes[name] = value
+                    ncml_mapping[name] = value
     else:
         ncml.raise_for_status()
-    ncml_mappings.append(ncml_attributes)
+    ncml_mappings.append(ncml_mapping)
 
 
-# In[55]:
+# In[57]:
 
 print ncml_mappings
+
+
+# In[ ]:
+
+
 
