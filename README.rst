@@ -1,4 +1,4 @@
-tds-catalog
-===========
+tdsharvest
+==========
 
-A database of metadata from the resources in a TDS catalog
+A package to harvest metadata from the NetCDF resources in a TDS catalog.
