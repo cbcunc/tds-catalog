@@ -5,11 +5,11 @@
 
 import os
 import re
+import sqlite3
 import requests
 import urlparse as up
 from lxml import etree as et
 from StringIO import StringIO
-import sqlite3
 
 
 # In[111]:
