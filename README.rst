@@ -1,4 +1,4 @@
 tds-catalog
 ===========
 
-A databse of metadata of the resources in a TDS catalog
+A database of metadata of the resources in a TDS catalog
