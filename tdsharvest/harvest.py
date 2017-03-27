@@ -25,8 +25,8 @@ def reap(catalog):
 def sow(isopath, resource_list):
     os.makedirs(isopath, mode=0o755, exist_ok=True)
     for resource, isourl in resource_list:
-        logging.info("resource =", resource)
-        logging.info("url =", isourl)
+        logging.info("resource = %s", resource)
+        logging.info("url = %s", isourl)
         resource_dir, resource_name = os.path.split(resource)
         isodir = os.path.join(isopath, resource_dir)
         os.makedirs(isodir, mode=0o755, exist_ok=True)
@@ -35,7 +35,7 @@ def sow(isopath, resource_list):
         xmlpath = os.path.join(isodir, resource_name+".xml")
         with open(xmlpath, "w") as iso:
             iso.write(response.text)
-        logging.info("metadata = ", xmlpath)
+        logging.info("metadata = %s", xmlpath)
         print(".", end="")
     return
 
