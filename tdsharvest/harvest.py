@@ -41,5 +41,7 @@ def sow(isopath, resource_list):
 
 if __name__ == "__main__":
    args = parseargs()
-   logging.basicConfig(filename=args.logpath, level=logging.DEBUG)
+   logging.basicConfig(filename=args.logpath, level=logging.DEBUG, format="%(levelname)s: %(asctime)s: pid=%(process)d: %(message)s")
+   logging.info("Beginning harvest.")
    sow(args.isopath, reap(args.catalog))
+   logging.info("Harvest complete.")
